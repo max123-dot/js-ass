@@ -2,9 +2,9 @@
 
 
 let studentName = "Kelvin";
- age = 21;
- score = 95;
- Classes = "Ss2";
+ age = 11;
+ score = 65;
+ Classes = "Ss3";
  Attendance = true;
 
 //  console.log(Score);
@@ -42,7 +42,7 @@ else{
 
 // Attendance
 
-if (Attendance = true) {
+if (Attendance === true) {
    console.log("Congratulations");
 }
 else{

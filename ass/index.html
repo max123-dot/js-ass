@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Makes the website responsive on phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculator</title>
+</head>
+
+<body>
+
+    <h1>Simple Calculator</h1>
+
+    <!-- First number -->
+    <input id="number1" type="number" placeholder="Enter first number">
+
+    <!-- Second number -->
+    <input id="number2" type="number" placeholder="Enter second number">
+
+    <br><br>
+
+    <!-- Buttons that call different functions -->
+    <button onclick="add()">Add</button>
+    <button onclick="subtract()">Subtract</button>
+    <button onclick="multiply()">Multiply</button>
+    <button onclick="divide()">Divide</button>
+
+    <!-- Where we will display the answer -->
+    <h2 id="result">Result: </h2>
+
+
+    <script>
+
+        // This function gets the two numbers from the inputs
+        function getNumbers() {
+
+            // Get the first input element
+            const number1 = document.getElementById("number1");
+
+            // Get the second input element
+            const number2 = document.getElementById("number2");
+
+            // Convert the input values from strings into numbers
+            const firstNumber = Number(number1.value);
+            const secondNumber = Number(number2.value);
+
+            // Return both numbers
+            return {
+                firstNumber,
+                secondNumber
+            };
+        }
+
+
+        // Function for addition
+        function add() {
+
+            // Get the numbers
+            const numbers = getNumbers();
+
+            // Add them together
+            const answer = numbers.firstNumber + numbers.secondNumber;
+
+            // Display the answer
+            document.getElementById("result").textContent =
+                "Result: " + answer;
+        }
+
+
+        // Function for subtraction
+        function subtract() {
+
+            const numbers = getNumbers();
+
+            const answer =
+                numbers.firstNumber - numbers.secondNumber;
+
+            document.getElementById("result").textContent =
+                "Result: " + answer;
+        }
+
+
+        // Function for multiplication
+        function multiply() {
+
+            const numbers = getNumbers();
+
+            const answer =
+                numbers.firstNumber * numbers.secondNumber;
+
+            document.getElementById("result").textContent =
+                "Result: " + answer;
+        }
+
+
+        // Function for division
+        function divide() {
+
+            const numbers = getNumbers();
+
+            // Prevent dividing by zero
+            if (numbers.secondNumber === 0) {
+
+                document.getElementById("result").textContent =
+                    "You cannot divide by zero!";
+
+                return;
+            }
+
+            const answer =
+                numbers.firstNumber / numbers.secondNumber;
+
+            document.getElementById("result").textContent =
+                "Result: " + answer;
+        }
+
+    </script>
+
+</body>
+</html>

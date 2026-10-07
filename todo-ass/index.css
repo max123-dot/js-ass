@@ -1,0 +1,117 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #111;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: #fffffff4;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px #ffffff12;
+}
+
+h1 {
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+
+h1 span {
+  color: #888;
+}
+
+.sub {
+  color: #777;
+  font-size: 13px;
+  margin: 8px 0 25px;
+}
+
+.input-box {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #111;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+#addBtn {
+  background: #000;
+  color: #fff;
+  padding: 0 15px;
+}
+
+.count {
+  margin: 24px 0 12px;
+  color: #666;
+  font-size: 13px;
+}
+
+#taskList {
+  list-style: none;
+}
+
+#taskList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.deleteBtn {
+  background: #000;
+  color: #fff;
+  padding: 7px 10px;
+  flex-shrink: 0;
+}
+
+.clear {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #f2f2f2;
+  color: #111;
+}
+
+.clear:hover {
+  background: #e5e5e5;
+}
+
+@media (max-width: 400px) {
+  .card {
+    padding: 22px;
+  }
+}
