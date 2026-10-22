@@ -4,50 +4,60 @@ const taskList = document.getElementById("taskList");
 const taskCount = document.getElementById("taskCount");
 const clearBtn = document.getElementById("clearAll");
 
-addBtn.addEventListener("click", function () {
 
-    const taskText = taskInput.value.trim();
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+function displayTasks() {
+    taskList.innerHTML = "";
+    tasks.forEach(function (taskText) {
+        const task = document.createElement("li");
 
-    // The empty task checker
-    if (taskText === "") {
-        return;
-    }
+        const taskName = document.createElement("span");
+        taskName.textContent = taskText;
 
-    // Create the task container
-    const task = document.createElement("li");
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.classList.add("deleteBtn");
 
-    // Create the task text
-    const taskName = document.createElement("span");
-    taskName.textContent = taskText;
+        task.appendChild(taskName);
+        task.appendChild(deleteBtn);
 
-    // Create the delete button
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.classList.add("deleteBtn");
+        taskList.appendChild(task);
 
-    // Put the text and button inside the task
-    task.appendChild(taskName);
-    task.appendChild(deleteBtn);
+        deleteBtn.addEventListener("click", function (){
+            tasks = tasks.filter(function (item){
+                return item !== taskText;
+            });
 
-    // Put the task on the page
-    taskList.appendChild(task);
-
-    // Delete this specific task
-    deleteBtn.addEventListener("click", function () {
-        task.remove();
-        updateCount();
+            saveTasks();
+            displayTasks();
+            
+        });
     });
-
     updateCount();
+}
 
-    taskInput.value = "";
-});
+
+addBtn.addEventListener("click", function () {
+    const taskText = taskInput.value.trim();
+    if (taskText !== ""){
+        tasks.push(taskText);
+        saveTasks();
+        displayTasks();
+        taskInput.value = "";
+    }
+})
 
 function updateCount() {
     taskCount.textContent = taskList.children.length;
 }
 
 clearBtn.addEventListener("click", function () {
-    taskList.innerHTML = "";
-    updateCount();
+    tasks = [];
+    saveTasks();
+    displayTasks()
 });
+
+displayTasks();

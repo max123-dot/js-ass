@@ -1,0 +1,120 @@
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Display</title>
+    <style>
+      /* Reset and base styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f4f7f6;
+        padding: 40px 20px;
+      }
+
+      /* Container for all cards */
+      #card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Individual Product Card Styling */
+      .product-card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      /* Hover effect for a premium feel */
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Card Image styling */
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background-color: #fafafa;
+      }
+
+      /* Product Title */
+      .product-card h1 {
+        font-size: 1.25rem;
+        color: #333333;
+        margin-bottom: 10px;
+        line-height: 1.4;
+      }
+
+      /* Product Description */
+      .product-card p.description {
+        font-size: 0.9rem;
+        color: #666666;
+        margin-bottom: 15px;
+        line-height: 1.5;
+        flex-grow: 1; /* Keeps the cards evenly spaced if text sizes vary */
+      }
+
+      /* Product Price */
+      .product-card p.price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #2ecc71; /* Eye-catching green for pricing */
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+        <!-- Renamed ID to container for better context -->
+        <div id="card-container"></div>
+    </section>
+    
+    <script>
+      try {
+        fetch("https://dummyjson.com/products")
+         .then(response => response.json())
+         .then((data) => {
+            console.log(data);
+
+            const container = document.getElementById("card-container");
+
+            data.products.forEach((product) => {
+                const card = document.createElement("div");
+                // Added a class here so we can target it in CSS
+                card.className = "product-card"; 
+                
+                card.innerHTML = `
+                  <img src="${product.thumbnail}" alt="${product.title}">
+                  <h1>${product.title}</h1>
+                  <p class="description">${product.description}</p>
+                  <p class="price">$${product.price}</p>
+                `;
+                container.appendChild(card);
+            });
+         })
+        } catch (error) {
+            console.error(error);
+        }
+    </script>
+  </body>
+</html>

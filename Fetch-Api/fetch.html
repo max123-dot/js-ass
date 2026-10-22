@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href = "style.css">
+  </head>
+  <body>
+    <section>
+        <div id="card"></div>
+    </section>
+    
+    <script>
+      try {
+        fetch("http://127.0.0.1:3001/products")
+         .then(response => response.json())
+         .then((data) => {
+            console.log(data);
+
+            data.products.forEach((product) => {
+                const card = document.createElement("div");
+                card.innerHTML = `
+                  <h1>${product.title}</h1>
+                  <p>${product.description}</p>
+                  <p>$${product.price}</p>
+                  <img src = "${product.thumbnail}">
+                  `;
+                document.getElementById("card").appendChild(card);
+            });
+         })
+        } catch (error) {
+            console.error(error);
+        }
+    </script>
+  </body>
+</html>
